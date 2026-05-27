@@ -15,7 +15,7 @@ BEGIN
 			LIMIT k
 		) vizinhos
 		GROUP BY rotulo
-		ORDER BY COUNT(*)
+		ORDER BY COUNT(*) DESC
 		LIMIT 1;
 
 		UPDATE dados_nao_rotulados
