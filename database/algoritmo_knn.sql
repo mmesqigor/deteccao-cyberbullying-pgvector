@@ -1,0 +1,25 @@
+DO $$
+
+DECLARE
+	registro RECORD;
+	rotulo_atribuido VARCHAR(30);
+	k INT := 5;
+
+BEGIN
+	FOR registro IN (SELECT id, embedding FROM dados_nao_rotulados) LOOP
+		SELECT rotulo INTO rotulo_atribuido
+		FROM (
+			SELECT rotulo
+			FROM dados_rotulados
+			ORDER BY embedding <-> registro.embedding
+			LIMIT k
+		) vizinhos
+		GROUP BY rotulo
+		ORDER BY COUNT(*)
+		LIMIT 1;
+
+		UPDATE dados_nao_rotulados
+		SET rotulo = rotulo_atribuido
+		WHERE id = registro.id
+	END LOOP
+END $$;
