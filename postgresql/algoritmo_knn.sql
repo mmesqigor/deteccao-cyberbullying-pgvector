@@ -1,11 +1,13 @@
-DO $$
+CREATE OR REPLACE FUNCTION classificar_knn(k INT)
+RETURNS VOID AS $$
 
 DECLARE
 	registro RECORD;
 	rotulo_atribuido VARCHAR(30);
-	k INT := 5;
 
 BEGIN
+	UPDATE dados_nao_rotulados SET rotulo = NULL;
+	
 	FOR registro IN (SELECT id, embedding FROM dados_nao_rotulados) LOOP
 		SELECT rotulo INTO rotulo_atribuido
 		FROM (
@@ -20,6 +22,7 @@ BEGIN
 
 		UPDATE dados_nao_rotulados
 		SET rotulo = rotulo_atribuido
-		WHERE id = registro.id
-	END LOOP
-END $$;
+		WHERE id = registro.id;
+	END LOOP;
+END;
+$$ LANGUAGE plpgsql;

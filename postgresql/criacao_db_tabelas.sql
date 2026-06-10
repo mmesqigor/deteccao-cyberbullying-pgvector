@@ -27,5 +27,3 @@ CREATE TABLE dados_nao_rotulados (
 );
 
 CREATE INDEX ON dados_rotulados USING hnsw (embedding vector_cosine_ops);
-
-
