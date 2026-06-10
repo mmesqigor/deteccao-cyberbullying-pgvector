@@ -13,7 +13,7 @@ BEGIN
 		FROM (
 			SELECT rotulo
 			FROM dados_rotulados
-			ORDER BY embedding <-> registro.embedding
+			ORDER BY embedding <=> registro.embedding
 			LIMIT k
 		) vizinhos
 		GROUP BY rotulo
