@@ -11,19 +11,24 @@ CREATE DATABASE "CyberbullyingDetection"
 
 CREATE EXTENSION IF NOT EXISTS vector;
 
-CREATE TABLE dados_rotulados (
+CREATE TABLE dados (
     id SERIAL PRIMARY KEY,
-    tweet TEXT,
-    embedding VECTOR(384),
-	rotulo VARCHAR(30)
+    tweet TEXT NOT NULL,
+	rotulo VARCHAR(30) NULL,
+	rotulado BOOLEAN NOT NULL,
+	indice_original INT NULL
 );
 
-CREATE TABLE dados_nao_rotulados (
+CREATE TABLE modelos_embedding (
 	id SERIAL PRIMARY KEY,
-	tweet TEXT,
-	embedding VECTOR(384),
-	rotulo VARCHAR(30),
-	indice_original INT
+	nome VARCHAR(50) NOT NULL UNIQUE,
+	dimensao INT NOT NULL
 );
 
-CREATE INDEX ON dados_rotulados USING hnsw (embedding vector_cosine_ops);
+CREATE TABLE embeddings (
+	id SERIAL PRIMARY KEY,
+	embedding VECTOR NOT NULL,
+	modelo_id INT NOT NULL REFERENCES modelos_embedding(id),
+	tweet_id INT NOT NULL REFERENCES dados(id),
+	UNIQUE (tweet_id, modelo_id)
+);
