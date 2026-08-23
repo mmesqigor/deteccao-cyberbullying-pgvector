@@ -55,7 +55,7 @@ Como sugestões para trabalhos futuros, destacam-se: investigar estratégias par
 ## Instalação das dependências
 
 ```bash
-pip install pandas numpy psycopg2-binary pgvector contractions emoji emot urlextract nltk langdetect sentence-transformers torch transformers fasttext-wheel scikit-learn matplotlib seaborn umap-learn
+py -3.11 -m pip install pandas numpy psycopg2-binary pgvector contractions emoji emot urlextract nltk langdetect sentence-transformers torch transformers fasttext-wheel scikit-learn matplotlib seaborn umap-learn
 ```
 
 O notebook também baixa automaticamente, na primeira execução, recursos do NLTK (`words`, `wordnet`, `omw-1.4`, `averaged_perceptron_tagger`, `punkt`, entre outros) e o modelo pré-treinado do FastText para inglês.
