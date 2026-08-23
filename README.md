@@ -48,7 +48,7 @@ Como sugestões para trabalhos futuros, destacam-se: investigar estratégias par
 
 ## Pré-requisitos
 
-- Python 3.8+
+- Python 3.11
 - Jupyter Notebook ou JupyterLab
 - PostgreSQL com a extensão [PGVector](https://github.com/pgvector/pgvector) instalada
 
